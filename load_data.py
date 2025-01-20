@@ -26,7 +26,7 @@ class CustomDataset(Dataset):
         }
     
 def dataloader(cfg, split = "train"):
-    tokenizer = BertTokenizer.from_pretrained(cfg["MODEL"]["BACKBONE"])
+    tokenizer = BertTokenizer.from_pretrained(cfg["MODEL"]["NAME"])
     dataset = CustomDataset(cfg["DATA"]["NAME"], tokenizer, max_length = cfg["DATA"]["MAX_LENGTH"], split = split)
     dataloader = DataLoader(dataset, batch_size = cfg["DATA"]["BATCH_SIZE"])
 
