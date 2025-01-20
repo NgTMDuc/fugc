@@ -1,0 +1,26 @@
+DATA:
+  NAME: "stanfordnlp/sst2"
+  BATCH_SIZE: 64
+  MAX_LENGTH: 512
+  NUM_LABELS: 2
+  
+
+MODEL:
+  BACKBONE: bert-base-uncased
+
+OPTIMIZER:
+  LR: 0.0001
+  PROPOSE: True
+  NUMBER_K: 3
+  la: 20
+  gamma: 0.1 
+  tau: 0.2
+  margin: 0.01
+  alpha: 0.1
+  NUM_EPOCHS: 100
+
+OUTPUTS:
+  CHECKPOINT:
+  SAVE_DIR:
+
+
