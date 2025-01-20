@@ -6,7 +6,7 @@ DATA:
   
 
 MODEL:
-  BACKBONE: bert-base-uncased
+  NAME: bert-base-uncased
 
 OPTIMIZER:
   LR: 0.0001
