@@ -11,8 +11,9 @@ class CustomDataset(Dataset):
         self.name = name
         self.tokenizer = tokenizer
         self.max_length = max_length
-        print(name)
-        self.data = load_dataset(str(name), split)
+        # print(name)
+        self.data = load_dataset(str(name))[split]
+
     
     def getitem(self, index):
         text = self.data["sentence"][index]
