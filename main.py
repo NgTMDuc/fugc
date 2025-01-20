@@ -49,6 +49,8 @@ if __name__ == "__main__":
     train_loader = dataloader(cfg, split = "train")
     valid_dataset  = dataloader(cfg, split = "validation")
     model = BERTClassifier(cfg["MODEL"]["NAME"], 2)
+    model = nn.DataParallel(model)
+    model = model.to(device)
     optimizer = AdamW(model.parameters(), lr=cfg["OPTIMIZER"]["LR"])
     total_steps = len(train_loader) * cfg["OPTIMIZER"]["NUM_EPOCHS"]
 
@@ -57,7 +59,7 @@ if __name__ == "__main__":
 
     if cfg["OPTIMIZER"]["PROPOSE"]:
         proposal_criteria = SoftTriple(cfg["OPTIMIZER"]["la"], cfg["OPTIMIZER"]["gamma"], cfg["OPTIMIZER"]["tau"],
-                                        cfg["OPTIMIZER"]["margin"], model.config.hidden_size, 2, cfg["OPTIMIZER"]["NUMBER_K"],device = device)
+                                        cfg["OPTIMIZER"]["margin"], model.module.hidden_size, 2, cfg["OPTIMIZER"]["NUMBER_K"],device = device)
     
     else:
         proposal_criteria = None

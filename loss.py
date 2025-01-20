@@ -20,7 +20,7 @@ class SoftTriple(nn.Module):
         self.tau = tau
         self.cN = cN
         self.K = K
-        self.fc = Parameter(torch.Tensor(dim, cN * K))
+        self.fc = Parameter(torch.Tensor(dim, cN * K)).to(device)
         self.weight = torch.zeros(cN*K, cN*K, dtype=torch.bool).to(device)
         
         for i in range(0, cN):
@@ -37,7 +37,7 @@ class SoftTriple(nn.Module):
         prob = F.softmax(simStruc*self.gamma, dim=2)
         
         simClass = torch.sum(prob*simStruc, dim=2)
-        marginM = torch.zeros(simClass.shape).cuda()
+        marginM = torch.zeros(simClass.shape).to(self.device)
         marginM[torch.arange(0, marginM.shape[0]), target] = self.margin
         lossClassify = F.cross_entropy(self.la*(simClass-marginM), target)
 

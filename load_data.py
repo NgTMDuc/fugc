@@ -15,7 +15,7 @@ class CustomDataset(Dataset):
         self.data = load_dataset(str(name))[split]
 
     
-    def getitem(self, index):
+    def __getitem__(self, index):
         text = self.data["sentence"][index]
         inputs = self.tokenizer(text, padding="max_length", truncation=True, max_length=self.max_length)
 
