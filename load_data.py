@@ -2,8 +2,7 @@
 from datasets import load_dataset 
 import torch
 from torch.utils.data import Dataset, DataLoader
-from transformers import BertTokenizer, BertModel, AdamW, get_linear_schedule_with_warmup
-from sklearn.metrics import accuracy_score, classification_report 
+from transformers import BertTokenizer
 
 class CustomDataset(Dataset):
     def __init__(self, name, tokenizer, max_length = 512, split = "train"):
@@ -13,7 +12,7 @@ class CustomDataset(Dataset):
         self.tokenizer = tokenizer
         self.max_length = max_length
         print(name)
-        self.data = load_dataset(name, split)
+        self.data = load_dataset(str(name), split)
     
     def getitem(self, index):
         text = self.data["sentence"][index]
