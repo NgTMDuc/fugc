@@ -25,7 +25,7 @@ class CustomDataset(Dataset):
             "label": torch.tensor(self.data["label"], dtype=torch.long)
         }
     
-    def len(self):
+    def __len__(self):
         return len(self.data)
 def dataloader(cfg, split = "train"):
     tokenizer = BertTokenizer.from_pretrained(cfg["MODEL"]["NAME"])
